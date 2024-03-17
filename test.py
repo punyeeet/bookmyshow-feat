@@ -23,8 +23,8 @@ async def test_multiple_origins_async():
 
     # Send requests to your FastAPI server asynchronously from different origins
     tasks = [
-        fetch(f"{BASE_URL}/2", headers1),
-        fetch(f"{BASE_URL}/2", headers2)
+        fetch(f"{BASE_URL}/2/1", headers1),
+        fetch(f"{BASE_URL}/2/2", headers2)
     ]
     responses = await asyncio.gather(*tasks)
 
