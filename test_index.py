@@ -14,8 +14,9 @@ DB_PASSWORD = os.getenv('DB_PASSWORD')
 
 
 
-
+@pytest.fixture(autouse=True)
 def setup_function():
+    # setup 
     if not (DB_PASSWORD and DB_HOST and DB_USER):
         raise Exception('Invalid/Unavailable Database credentials')
     
@@ -25,6 +26,12 @@ def setup_function():
     cursor.execute('UPDATE `bookmyshow`.`seats` SET `status` = %s, `booking_id` = NULL WHERE `seat_id` = %s', ('available', 1))
     cursor.execute('UPDATE `bookmyshow`.`seats` SET `status` = %s, `booking_id` = NULL WHERE `seat_id` = %s', ('available', 2))
     conn.commit()
+    yield 
+    # teardown
+    cursor.execute('UPDATE `bookmyshow`.`seats` SET `status` = %s, `booking_id` = NULL WHERE `seat_id` = %s', ('available', 1))
+    cursor.execute('UPDATE `bookmyshow`.`seats` SET `status` = %s, `booking_id` = NULL WHERE `seat_id` = %s', ('available', 2))
+    conn.commit()
+    
         
 # test case to book two different tickets at a time and pyament time '<' time limit hence successfull
 @pytest.mark.asyncio
