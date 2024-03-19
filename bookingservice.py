@@ -60,7 +60,7 @@ async def book_ticket(seat_id,payment_time):
         
         conn.commit()
         
-        
+        return { "booking_id": response["booking_id"] }
         
     except pymysql.Error as e:
         # Rollback transaction in case of an error

@@ -10,7 +10,7 @@ app = FastAPI()
 async def handle_booking(seat_id:str,payment_time:str):
     print('enetered')
     try:
-        await book_ticket(seat_id=seat_id,payment_time=payment_time)
+        response = await book_ticket(seat_id=seat_id,payment_time=payment_time)
         
     except pymysql.Error as e:
         raise HTTPException(400,"Seat already Reserved")
@@ -24,6 +24,6 @@ async def handle_booking(seat_id:str,payment_time:str):
     except Exception as e:
         raise HTTPException(500,e)
     
-    return {"mssg":" Acquired and released lock, booking successfull."}
+    return {"mssg":" Acquired and released lock, booking successfull.", "booking_id": response["booking_id"] }
 
 
