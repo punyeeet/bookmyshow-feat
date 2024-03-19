@@ -1,4 +1,4 @@
-# APP: BookMyShow 
+# APP: BookMyShow ![icon](https://in.bmscdn.com/webin/common/icons/logo.svg)
 ## Feature: Real time booking and Handling concurrent booking requests for the same/diiferent seats by multiple users.
 
 ## Setup
