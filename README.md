@@ -1,12 +1,15 @@
-# Setup
-## Virtual Environment
+# APP: BookMyShow 
+## Feature: Real time booking and Handling concurrent booking requests for the same/diiferent seats by multiple users.
+
+## Setup
+### Virtual Environment
 1. Extract the folder `SeatBooking` from the in the local machine.
 2. Open the `SeatBooking` directory in the Terminal (UNIX) 
 3. Load the dependencies using the following command:
    `pipenv install -r requirements.txt`
    This loads all the dependencies that's required to run the program.
 
-## MySQL:
+### MySQL:
 To set up MySQL for your application, you'll need to follow these general steps:
 
 1. **Install MySQL Server**: Install **MySQL Community Server** on your system. You can download MySQL Server from the official website or use a package manager specific to your operating system.
@@ -68,29 +71,29 @@ To set up MySQL for your application, you'll need to follow these general steps:
 	(2, NULL, 'available');
 
 ```
-# Usage
-## Usage Details
+## Usage
+### Usage Details
 
-#### Prerequisites:
+##### Prerequisites:
 - Ensure that you have Python 3.x installed on your system.
 - Install the required Python packages by running `pip install -r requirements.txt`.
 - Set up a MySQL database and configure the connection details in the `.env` file.
 
-#### Running the Application:
+##### Running the Application:
 1. Start the FastAPI server by running the command:
    ```
    uvicorn main:app --host 127.0.0.1 --port 8000
    ```
    This command will launch the FastAPI server, and the application will be accessible at `http://localhost:8000`.
 
-#### Testing the Application:
+##### Testing the Application:
 1. Execute the provided test script `test_index.py` to run the test cases against the application:
    ```
    pytest test_index.py
    ```
    This command will execute all the test cases defined in the script and display the test results.
 
-#### Using the API Endpoints:
+##### Using the API Endpoints:
 - Once the application is running, you can access the API endpoints using an HTTP client (e.g., Postman, cURL) or by sending HTTP requests programmatically.
 - The main API endpoint for booking seats is `/book/params`, which accepts seat ID and payment time as query parameters. Example usage:
   ```
@@ -101,7 +104,7 @@ To set up MySQL for your application, you'll need to follow these general steps:
 
 Following these usage details will enable you to effectively run the application, test its functionality, and interact with the API endpoints to perform seat bookings.
 
-## Testing Details 
+### Testing Details 
 
 The provided `test_index.py` script contains test cases for testing the functionality of the booking endpoint implemented in the `handle_booking` function of the FastAPI application. Below are the testing details along with a write-up for each test case:
 
@@ -132,7 +135,7 @@ The provided `test_index.py` script contains test cases for testing the function
 
 These test cases cover various scenarios to ensure the correct behavior of the booking endpoint under different conditions, including concurrent requests, seat availability, and payment time limits. They help validate the robustness and reliability of the booking functionality implemented in the FastAPI application.
 
-# Endpoint Details
+## Endpoint Details
 
 Here are the details for the `/book/params` endpoint:
 
@@ -165,7 +168,7 @@ Here are the details for the `/book/params` endpoint:
 
 This endpoint follows the RESTful principles and accepts query parameters to specify the seat ID and payment time. It provides clear and concise responses to indicate the outcome of the booking attempt, enabling clients to handle different scenarios appropriately.
 
-# Database Schema
+## Database Schema
 Schema for the `Seats` table:
 
 ```sql
@@ -186,8 +189,8 @@ Explanation of the schema:
 
 This schema provides a basic structure to manage seat information, including its ID, the user who booked it (if any), and its current status. 
 
-# Challenges Faced
-## **Challenge 1: Communication Between Threads**
+## Challenges Faced
+### **Challenge 1: Communication Between Threads**
 
 **Problem**: Ensuring _immediate_ communication between threads to allow either the ``seat_booking`` function or the `timeout` function to stop the other's operation depending on which one finishes first was a problem. 
 
@@ -200,7 +203,7 @@ By leveraging `asyncio`'s features and carefully orchestrating the interactions 
 
 ---
 
-## **Challenge 2: Simultaneous Requests from SwaggerUI**
+### **Challenge 2: Simultaneous Requests from SwaggerUI**
 
 **Problem:** It was difficult to simulate simultaneous requests from the SwaggerUI, which necessitated the creation of a custom test script.
 
